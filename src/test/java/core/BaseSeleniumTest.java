@@ -1,9 +1,11 @@
 package core;
 
 import core.BaseSeleniumPage;
+import init.Config;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,8 +21,11 @@ abstract public class BaseSeleniumTest {
     @Before
     public void setUp() {
         drivers = new ArrayList<>();
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
+        /*WebDriverManager.chromedriver().setup();
+        WebDriverManager.firefoxdriver().setup();*/
+
+        System.setProperty("webdriver.chrome.driver", Config.getProperty("chrome_driver_path"));
+        System.setProperty("webdriver.gecko.driver", Config.getProperty("mozilla_driver_path"));
 
         drivers.add(new ChromeDriver());
         drivers.add(new FirefoxDriver());
