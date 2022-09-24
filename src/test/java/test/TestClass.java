@@ -16,26 +16,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestClass extends BaseSeleniumTest {
 
-    @BeforeEach
-    public void setUp() {
-        drivers = new ArrayList<>();
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().avoidBrowserDetection().setup();
 
-        //System.setProperty("webdriver.chrome.driver", Config.getProperty("chrome_driver_path"));
-        //System.setProperty("webdriver.gecko.driver", Config.getProperty("mozilla_driver_path"));
-
-        drivers.add(new ChromeDriver());
-        drivers.add(new FirefoxDriver());
-
-        drivers.forEach(driver -> {
-            driver.manage().window().maximize();
-            driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-            driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        });
-
-        BaseSeleniumPage.setDriver(drivers);
-    }
 
     @Test
     public void check() {
