@@ -2,40 +2,13 @@ package pages;
 
 import core.BaseSeleniumPage;
 import init.Config;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.concurrent.TimeUnit;
-
 public class MainPage extends BaseSeleniumPage {
-
-    @FindBy(xpath = "//button[text()=\"I Accept\"]")
-    private WebElement cookiesAccept;
-
-    @FindBy(xpath = "//input[@placeholder=\"Search\"]")
-    private WebElement searchArea;
-
-    @FindBy(xpath = "//button[text()=\"Sign up for free\"]")
-    private WebElement createAccountButton;
-
-    @FindBy(xpath = "//button[text()=\"Sign in\"]")
-    private WebElement signInButton;
-
-    @FindBy(xpath = "//*[@id=\"sign_in_up_email\"]")
-    private WebElement emailInput;
-
-    @FindBy(xpath = "//button[@id=\"sign_in_up_submit\"]")
-    private WebElement buttonEmailSubmit;
-
-    @FindBy(xpath = "//button[@id='enter_password_submit']")
-    private WebElement buttonPasswordSubmit;
-
-    @FindBy(xpath = "//div[@class='recaptcha-checkbox-border']")
-    private WebElement captcha;
-
 
     public MainPage() {
         drivers.forEach(driver -> {
@@ -44,14 +17,49 @@ public class MainPage extends BaseSeleniumPage {
         });
     }
 
-    public void createAccount(String email, String password) {
-        cookiesAccept.click();
-        signInButton.click();
-        //createAccountButton.click();
-        //drivers.get(0).manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        emailInput.click();
-        emailInput.sendKeys(email);
-        buttonEmailSubmit.click();
+    @FindBy(xpath = "//a[@id='login-from-header']")
+    private WebElement loginEntryButton;
 
+    @FindBy(xpath = "//a[@id='scribd-login']")
+    private WebElement scribdButton;
+
+    @FindBy(xpath = "//a[text()='Sign in']")
+    private WebElement signIn;
+
+    @FindBy(xpath = "//button[@class='osano-cm-dialog__close osano-cm-close']")
+    private WebElement closeDialog;
+
+    @FindBy(xpath = "//a[text()='Sign in with email']")
+    private WebElement signInWithLogin;
+
+    @FindBy(xpath = "//input[@id='login_or_email']")
+    private WebElement loginInput;
+
+    @FindBy(xpath = "//input[@id='login_password']")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "//button[text()='Sign in']")
+    private WebElement submitButton;
+
+    @FindBy(xpath = "//*[not(@id='upload') and @href='/upload']")
+    private WebElement uploadButton;
+
+
+    public void signIn(String login, String password) {
+        loginEntryButton.click();
+        scribdButton.click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        closeDialog.click();
+        signIn.click();
+        signInWithLogin.click();
+        loginInput.sendKeys(login);
+        passwordInput.sendKeys(password);
+        submitButton.click();
+        new WebDriverWait(drivers.get(0), 60)
+                .until(ExpectedConditions.elementToBeClickable(uploadButton));
     }
 }
