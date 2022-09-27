@@ -2,12 +2,18 @@ package test;
 
 import core.BaseSeleniumTest;
 import init.Config;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import pages.MainPage;
 import pages.UploadPage;
 
 public class TestClass extends BaseSeleniumTest {
 
+
+    @BeforeAll
+    public static void setUp() {
+        init();
+    }
 
 
     @Test

@@ -16,8 +16,7 @@ abstract public class BaseSeleniumTest {
 
     protected static List<WebDriver> drivers;
 
-    @BeforeAll
-    public static void setUp() {
+    public static void init() {
         drivers = new ArrayList<>();
         WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
