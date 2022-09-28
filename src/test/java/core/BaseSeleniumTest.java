@@ -21,6 +21,7 @@ abstract public class BaseSeleniumTest {
         WebDriverManager.chromedriver().setup();
         WebDriverManager.firefoxdriver().setup();
 
+
         drivers.add(new ChromeDriver());
         //drivers.add(new FirefoxDriver());
 
@@ -36,8 +37,8 @@ abstract public class BaseSeleniumTest {
     @AfterAll
     public static void tearDown() {
         drivers.forEach(driver -> {
-            //driver.close();
-            //driver.quit();
+            driver.close();
+            driver.quit();
         });
     }
 

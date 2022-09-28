@@ -12,8 +12,8 @@ public class Config {
     static {
         try {
             fileInputStream =
-                    //new FileInputStream("C:\\Users\\vyach\\IdeaProjects\\Lab3Test\\src\\main\\resources\\configuration.properties");
-                    new FileInputStream("C:\\Users\\R355-W-6-Stud\\Desktop\\f1\\Lab3Test\\src\\main\\resources\\configuration.properties");
+                    new FileInputStream("C:\\Users\\vyach\\IdeaProjects\\Lab3Test\\src\\main\\resources\\configuration.properties");
+                    //new FileInputStream("C:\\Users\\R355-W-6-Stud\\Desktop\\f1\\Lab3Test\\src\\main\\resources\\configuration.properties");
             properties = new Properties();
             properties.load(fileInputStream);
         } catch (IOException e) {
